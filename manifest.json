@@ -4,6 +4,7 @@
   "name": "SaveThyTab",
   "action": {
     "default_popup": "index.html",
-    "default_icon": "popIcon.png"
-  }
+    "default_icon": "savethytab.png"
+  },
+  "permissions": ["tabs"]
 }

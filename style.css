@@ -1,36 +1,110 @@
+/* BODY */
 body {
-  margin: 0;
-  padding: 10px;
-  font-family: Arial, Helvetica, sans-serif;
-  min-width: 400px;
-}
-
-input {
-  width: 100%;
-  padding: 10px;
+  font-family: "Inter", sans-serif;
+  background: #e0e7ff; /* soft modern purple-ish background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  color: #111827;
+  width: 320px;
   box-sizing: border-box;
-  border: 1px solid #419353;
-  margin-bottom: 4px;
 }
 
-button {
-  background: #0c0758;
-  color: white;
-  padding: 10px 20px;
+/* INPUT */
+#input-el {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #6366f1; /* visible modern border */
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  background: #ffffff;
+  color: #111827;
+  transition: all 0.2s ease;
+  margin-bottom: 12px;
+}
+
+#input-el:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+/* BUTTONS */
+/* BUTTONS CONTAINER */
+.button-container {
+  display: flex;
+  justify-content: space-between; /* spread buttons evenly */
+  gap: 8px; /* small gap between buttons */
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.button-container button {
+  flex: 1; /* all buttons take equal width */
+  padding: 10px 0;
+  border-radius: 8px;
   border: none;
-  font-weight: bold;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-ul {
-  margin-top: 20px;
+#input-btn {
+  background: #6366f1;
+  color: #fff;
+}
+
+#input-btn:hover {
+  background: #4f46e5;
+}
+
+#tab-btn {
+  background: #10b981;
+  color: #fff;
+}
+
+#tab-btn:hover {
+  background: #059669;
+}
+
+#delete-btn {
+  background: #ef4444;
+  color: #fff;
+}
+
+#delete-btn:hover {
+  background: #dc2626;
+}
+
+/* LEADS LIST */
+#ul-el {
   list-style: none;
-  padding-left: 0;
+  padding: 0;
+  width: 100%;
+  margin-top: 16px;
 }
 
-li {
-  margin-top: 5px;
+#ul-el li {
+  background: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #d1d5db;
+  transition: transform 0.15s ease;
 }
 
-a {
-  color: #5f9341;
+#ul-el li:hover {
+  transform: translateX(2px);
+}
+
+#ul-el li a {
+  text-decoration: none;
+  color: #6366f1;
+  font-weight: 500;
+}
+
+#ul-el li a:hover {
+  text-decoration: underline;
 }
