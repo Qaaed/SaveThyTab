@@ -1,36 +1,39 @@
-let myLeads = [];
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import {
+  getDatabase,
+  ref,
+  push,
+  onValue,
+  remove,
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+
+const firebaseConfig = {
+  databaseURL:
+    "https://savethytab-default-rtdb.asia-southeast1.firebasedatabase.app/",
+};
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const referenceInDB = ref(database, "thytabs");
+
+//retrieving IDS
 const inputEl = document.getElementById("input-el");
 const inputBtn = document.getElementById("input-btn");
 const ulEl = document.getElementById("ul-el");
 const deleteBtn = document.getElementById("delete-btn");
-const tabBtn = document.getElementById("tab-btn");
-const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
-if (leadsFromLocalStorage) {
-  myLeads = leadsFromLocalStorage;
-  render(myLeads);
-}
-deleteBtn.addEventListener("click", function () {
-  localStorage.clear();
-  myLeads = [];
-  render(myLeads);
-});
 
-tabBtn.addEventListener("click", function () {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    myLeads.push(tabs[0].url);
-    localStorage.setItem("myLeads", JSON.stringify(myLeads));
-    render(myLeads);
-  });
+//event listeners
+deleteBtn.addEventListener("click", function () {
+  remove(referenceInDB);
+  ulEl.innerHTML = "";
 });
 
 inputBtn.addEventListener("click", function () {
-  myLeads.push(inputEl.value);
+  push(referenceInDB, inputEl.value);
   inputEl.value = "";
-  localStorage.setItem("myLeads", JSON.stringify(myLeads));
-  render(myLeads);
-  console.log(localStorage.getItem("myLeads"));
 });
 
+//render function
 function render(leads) {
   let listItems = "";
   for (let i = 0; i < leads.length; i++) {
@@ -45,3 +48,12 @@ function render(leads) {
 
   ulEl.innerHTML = listItems;
 }
+
+onValue(referenceInDB, function (snapshot) {
+  const snaptshotExists = snapshot.exists();
+  if (snaptshotExists) {
+    const snapshotValues = snapshot.val();
+    const chores = Object.values(snapshotValues);
+    render(chores);
+  }
+});
